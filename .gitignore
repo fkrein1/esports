@@ -1,5 +1,5 @@
 nlw
-server/node-modules
+server/node_modules
 web/node_modules
 
 # macOS
