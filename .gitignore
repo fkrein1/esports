@@ -1,0 +1,6 @@
+nlw
+server/node-modules/
+web/node-modules/
+
+# macOS
+.DS_Store
