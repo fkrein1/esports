@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const getGames = async () => {
-      const response = await axios('http://localhost:3333/games');
+      const response = await axios('https://esports-production.up.railway.app/games');
       setGames(response.data);
       setTimeout(() => {
         setOptions({

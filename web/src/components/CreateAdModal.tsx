@@ -20,7 +20,7 @@ export function CreateAdModal(props: CreateAdModalProps) {
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
     try {
-      await axios.post('http://localhost:3333/ads', {
+      await axios.post('https://esports-production.up.railway.app/ads', {
         gameId: data.game,
         name: data.name,
         yearsPlaying: Number(data.yearsPlaying),
