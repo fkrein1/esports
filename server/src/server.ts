@@ -7,6 +7,7 @@ import { minutesToHourString } from './utils/minutesToHourString';
 
 const app = express();
 const prisma = new PrismaClient();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors())
@@ -85,4 +86,4 @@ app.use(((err, _req, res, _next) => {
   res.status(500).json({ error: `Erro: ${err.message}` });
 }) as ErrorRequestHandler);
 
-app.listen(3333, () => console.log('running on 3333'));
+app.listen(port, () => console.log(`running on port ${port}`));
