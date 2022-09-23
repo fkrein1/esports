@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { CreateAdBanner } from './components/CreateAdBanner';
 import { CreateAdModal } from './components/CreateAdModal';
 import { GameBanner } from './components/GameBanner';
-
 import './styles/main.css';
 
 export interface Game {
@@ -19,28 +18,37 @@ export interface Game {
 }
 
 function App() {
+  const [options, setOptions] = useState({});
   const [games, setGames] = useState<Game[]>([]);
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 6,
-      spacing: 15,
-    },
+  const [ref] = useKeenSlider<HTMLDivElement>(options);
 
-    breakpoints: {
-      '(max-width: 1024px)': {
+  useEffect(() => {
+    setTimeout(() => {
+      setOptions({
+        loop: true,
+        mode: 'free-snap',
         slides: {
-          perView: 3,
+          perView: 6,
           spacing: 15,
         },
-      },
-      '(max-width: 640px)': {
-        slides: {
-          perView: 2,
-          spacing: 15,
+
+        breakpoints: {
+          '(max-width: 1024px)': {
+            slides: {
+              perView: 3,
+              spacing: 15,
+            },
+          },
+          '(max-width: 640px)': {
+            slides: {
+              perView: 2,
+              spacing: 15,
+            },
+          },
         },
-      },
-    },
-  });
+      });
+    }, 20);
+  }, []);
 
   useEffect(() => {
     const getGames = async () => {
@@ -51,9 +59,9 @@ function App() {
   }, []);
 
   return (
-    <main className="mx-20">
+    <main className="mx-10 sm:mx-20">
       <div className="max-w-[1344px] flex flex-col items-center my-20 mx-auto">
-        <img src="/logo.svg" />
+        <img src="/logo.svg" className="h-32 h-sm:h-40" />
         <h1 className="text-6xl text-white font-black mt-20 text-center">
           Seu{' '}
           <span className="bg-nlw-gradient bg-clip-text text-transparent">
@@ -62,10 +70,9 @@ function App() {
           está aqui.
         </h1>
 
-        <div className="keen-slider mt-20" ref={sliderRef}>
-          {games.map((game, index) => (
+        <div className="keen-slider mt-20 flex" ref={ref}>
+          {games.map((game) => (
             <GameBanner
-              index={index + 1}
               key={game.id}
               bannerUrl={game.bannerUrl}
               title={game.title}
@@ -73,12 +80,12 @@ function App() {
             />
           ))}
         </div>
-        <Dialog.Root>
+        <Dialog.Root >
           <CreateAdBanner />
           <CreateAdModal games={games} />
         </Dialog.Root>
       </div>
-    </main> 
+    </main>
   );
 }
 
