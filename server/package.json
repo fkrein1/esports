@@ -5,12 +5,12 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "tsnd src/index.ts",
-    "build": "npm migrate:deploy && tsc",
-    "start": "node dist/index.js",
-    "migrate:dev": "prisma migrate dev",
-    "migrate:deploy": "prisma migrate deploy",
-    "migrate:status": "prisma migrate status",
-    "generate": "prisma generate"
+    "build": "npm run migrate:deploy && tsc",
+    "start": "node dist/server.js",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:deploy": "npx prisma migrate deploy",
+    "migrate:status": "npx prisma migrate status",
+    "generate": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
