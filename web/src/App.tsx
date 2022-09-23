@@ -23,37 +23,34 @@ function App() {
   const [ref] = useKeenSlider<HTMLDivElement>(options);
 
   useEffect(() => {
-    setTimeout(() => {
-      setOptions({
-        loop: true,
-        mode: 'free-snap',
-        slides: {
-          perView: 6,
-          spacing: 15,
-        },
-
-        breakpoints: {
-          '(max-width: 1024px)': {
-            slides: {
-              perView: 3,
-              spacing: 15,
-            },
-          },
-          '(max-width: 640px)': {
-            slides: {
-              perView: 2,
-              spacing: 15,
-            },
-          },
-        },
-      });
-    }, 20);
-  }, []);
-
-  useEffect(() => {
     const getGames = async () => {
       const response = await axios('http://localhost:3333/games');
       setGames(response.data);
+      setTimeout(() => {
+        setOptions({
+          loop: true,
+          mode: 'free-snap',
+          slides: {
+            perView: 6,
+            spacing: 15,
+          },
+  
+          breakpoints: {
+            '(max-width: 1024px)': {
+              slides: {
+                perView: 3,
+                spacing: 15,
+              },
+            },
+            '(max-width: 640px)': {
+              slides: {
+                perView: 2,
+                spacing: 15,
+              },
+            },
+          },
+        });
+      }, 10);
     };
     getGames();
   }, []);
